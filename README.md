@@ -55,6 +55,11 @@ This project is a simple task scheduler written in C. It provides a basic framew
     printf("task3\n");
     }
 
+    
+    int32_t idle_task(int state){
+    sleep(100);
+    }
+
     ```
 
 3. **Initialize the Scheduler**
@@ -71,11 +76,13 @@ This project is a simple task scheduler written in C. It provides a basic framew
     task[1].tick_period  = 100;
     task[2].task_pointer = task3;
     task[2].tick_period  = 120;
+    task[3].task_pointer = idle_task;
+    task[3].tick_period  = 1;
     //task[0].task_pointer(NULL);
     init_timer_tick();
     
     //ualarm(1000, 1);   
-    loop(task, 3, 10);
+    loop(task, 4, 10);
     free(task);
     return 0;
     }
