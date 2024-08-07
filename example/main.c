@@ -1,6 +1,10 @@
 #define WORKER_IMPLEMENTATION 
 #include "worker.h"
 
+int32_t idle_task(int state){
+    sleep(100);
+}
+
 int32_t task1(int state){
 
     printf("Task1\n");
@@ -40,9 +44,10 @@ int main(){
     task[1].tick_period  = 100;
     task[2].task_pointer = task3;
     task[2].tick_period  = 120;
-
+    task[3].task_pointer = idle_task;
+    task[3].tick_period  = 1;
     init_timer_tick();
-    loop(task, 3, 10);
+    loop(task, 4, 10);
     free(task);
     return 0;
 }
